@@ -1,0 +1,2365 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#080d1a">
+
+<title>Papa & Theo – GAMECOM MISSION 2026</title>
+
+<style>
+
+:root{
+  --bg:#080d1a;
+  --card:#131b2d;
+  --card2:#19243a;
+  --text:#ffffff;
+  --muted:#9aa8bf;
+
+  --purple:#7c3aed;
+  --blue:#2563eb;
+  --cyan:#06b6d4;
+  --pink:#ec4899;
+  --orange:#f97316;
+  --lime:#84cc16;
+  --yellow:#facc15;
+  --red:#ef4444;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at top,#172554 0,#080d1a 35%);
+  color:var(--text);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+main{
+  max-width:760px;
+  margin:auto;
+  padding:14px 14px 100px;
+}
+
+.hero{
+  background:
+    linear-gradient(
+      135deg,
+      #6d28d9,
+      #2563eb
+    );
+
+  border-radius:26px;
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero:after{
+  content:"🎮";
+  position:absolute;
+  right:-10px;
+  bottom:-18px;
+  font-size:100px;
+  opacity:.12;
+  transform:rotate(-12deg);
+}
+
+.kicker{
+  color:var(--yellow);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+
+h1{
+  font-size:31px;
+  line-height:1;
+  margin:7px 0;
+}
+
+.subtitle{
+  opacity:.9;
+  font-weight:600;
+}
+
+.levelrow{
+  margin-top:17px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-weight:900;
+}
+
+.progress{
+  height:15px;
+  margin-top:8px;
+  background:#ffffff22;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+#xpbar{
+  height:100%;
+  width:0;
+  background:
+    linear-gradient(
+      90deg,
+      var(--yellow),
+      var(--lime)
+    );
+  transition:.35s;
+}
+
+.xpstats{
+  display:flex;
+  justify-content:space-between;
+  margin-top:7px;
+  font-size:13px;
+  font-weight:800;
+}
+
+.tabs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin:15px 0;
+}
+
+.tab{
+  border:0;
+  color:white;
+  background:#182238;
+  border-radius:14px;
+  min-height:47px;
+  font-weight:900;
+}
+
+.tab.active{
+  background:var(--cyan);
+  color:#05131a;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.sectiontitle{
+  margin:20px 3px 8px;
+}
+
+.sectiontitle h2{
+  margin:0;
+  font-size:20px;
+}
+
+.sectiontitle div{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:3px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid #ffffff15;
+  border-radius:19px;
+  padding:15px;
+  margin:10px 0;
+}
+
+.intro{
+  background:
+    linear-gradient(
+      135deg,
+      #182238,
+      #111827
+    );
+}
+
+.card h3{
+  margin:0 0 7px;
+  font-size:17px;
+}
+
+.small{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.quest{
+  display:flex;
+  gap:11px;
+  align-items:center;
+}
+
+.icon{
+  width:50px;
+  height:50px;
+  min-width:50px;
+
+  border-radius:15px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:24px;
+}
+
+.questcontent{
+  min-width:0;
+  flex:1;
+}
+
+.questname{
+  font-weight:900;
+  font-size:16px;
+}
+
+.questdesc{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:3px;
+}
+
+.reward{
+  color:var(--yellow);
+  font-size:12px;
+  font-weight:900;
+  margin-top:5px;
+}
+
+.tick{
+  width:42px;
+  height:42px;
+  min-width:42px;
+
+  border-radius:13px;
+  border:2px solid #ffffff44;
+
+  background:transparent;
+  color:white;
+
+  font-size:23px;
+  font-weight:bold;
+}
+
+.quest.done{
+  opacity:.53;
+}
+
+.quest.done .tick{
+  background:var(--lime);
+  border-color:var(--lime);
+  color:#071109;
+}
+
+.quest.done .questname{
+  text-decoration:line-through;
+}
+
+.time{
+  display:inline-block;
+  border-radius:9px;
+  padding:4px 8px;
+
+  font-size:11px;
+  font-weight:900;
+
+  margin-bottom:6px;
+}
+
+.tip{
+  border-left:4px solid var(--yellow);
+  background:#111b2d;
+  border-radius:12px;
+  padding:12px;
+  margin-top:10px;
+}
+
+.photo{
+  border-color:#ec489955;
+}
+
+.side{
+  border-color:#06b6d455;
+}
+
+input{
+  width:100%;
+  border-radius:14px;
+  border:1px solid #ffffff22;
+
+  background:#0a1120;
+  color:white;
+
+  padding:14px;
+
+  font-size:16px;
+  margin-top:8px;
+}
+
+.bossarea{
+  margin-top:12px;
+}
+
+.boss{
+  background:
+    linear-gradient(
+      135deg,
+      #32175d,
+      #151c30
+    );
+
+  border:1px solid #8b5cf6;
+}
+
+.bosshead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.bosslabel{
+  background:var(--yellow);
+  color:#111827;
+
+  font-size:11px;
+  font-weight:1000;
+
+  padding:5px 9px;
+  border-radius:9px;
+}
+
+.locked{
+  opacity:.55;
+}
+
+.lock{
+  text-align:center;
+  padding:22px;
+}
+
+.lockicon{
+  font-size:38px;
+  margin-bottom:7px;
+}
+
+.achievement{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.achievementIcon{
+  width:48px;
+  height:48px;
+
+  border-radius:50%;
+
+  background:#273247;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:23px;
+}
+
+.achievement.unlocked
+.achievementIcon{
+  background:var(--yellow);
+}
+
+.achievement.unlocked{
+  border-color:#facc1555;
+}
+
+.achievement.lockedAchievement{
+  opacity:.4;
+}
+
+.final{
+  display:none;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--pink)
+    );
+
+  text-align:center;
+
+  padding:28px 16px;
+  border-radius:22px;
+
+  margin:17px 0;
+}
+
+.final.show{
+  display:block;
+}
+
+.final .trophy{
+  font-size:60px;
+}
+
+.final h2{
+  margin:4px 0;
+}
+
+.resetbox{
+  text-align:center;
+  margin-top:25px;
+}
+
+.reset{
+  border:0;
+
+  border-radius:13px;
+
+  padding:12px 18px;
+
+  background:#1c273d;
+  color:#bac5d6;
+
+  font-weight:800;
+}
+
+.flash{
+  position:fixed;
+
+  left:50%;
+  top:18px;
+
+  transform:translateX(-50%) translateY(-120px);
+
+  background:var(--yellow);
+  color:#101010;
+
+  font-weight:1000;
+
+  padding:13px 20px;
+
+  border-radius:999px;
+
+  z-index:100;
+
+  transition:.35s;
+}
+
+.flash.show{
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+@media(max-width:370px){
+
+  .tabs{
+    gap:5px;
+  }
+
+  .tab{
+    font-size:12px;
+  }
+
+  .hero{
+    padding:17px;
+  }
+
+  h1{
+    font-size:27px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div
+  id="flash"
+  class="flash">
+  +100 XP!
+</div>
+
+
+<main>
+
+
+<div class="hero">
+
+  <div class="kicker">
+    GAMECOM MISSION 2026
+  </div>
+
+  <h1>
+    PAPA & THEO
+  </h1>
+
+  <div class="subtitle">
+    Scout. Zocken. Fotos. Bosse besiegen.
+  </div>
+
+
+  <div class="levelrow">
+
+    <span id="level">
+      LEVEL 1
+    </span>
+
+    <span id="rank">
+      ROOKIE
+    </span>
+
+  </div>
+
+
+  <div class="progress">
+    <div id="xpbar"></div>
+  </div>
+
+
+  <div class="xpstats">
+
+    <span id="xp">
+      0 XP
+    </span>
+
+    <span id="percent">
+      0 %
+    </span>
+
+  </div>
+
+</div>
+
+
+
+<div class="tabs">
+
+  <button
+    class="tab active"
+    data-page="brief">
+    🎯 Briefing
+  </button>
+
+  <button
+    class="tab"
+    data-page="day1">
+    🕹️ Tag 1
+  </button>
+
+  <button
+    class="tab"
+    data-page="day2">
+    👾 Tag 2
+  </button>
+
+</div>
+
+
+
+<section
+  id="brief"
+  class="page active">
+
+
+  <div class="card intro">
+
+    <h3>
+      🎮 Willkommen zur Mission
+    </h3>
+
+    <p>
+      Zwei Tage gamescom.
+      Ein Team.
+      Viele Quests.
+    </p>
+
+    <p>
+      <b>
+        Teamname:
+      </b>
+      Papa & Theo
+    </p>
+
+    <p>
+      <b>
+        Base:
+      </b>
+      Hyatt Regency Köln
+    </p>
+
+    <p>
+      <b>
+        Hauptziel:
+      </b>
+      So viel Spaß wie möglich.
+    </p>
+
+  </div>
+
+
+
+  <div class="card">
+
+    <h3>
+      🗺️ Missionsdaten
+    </h3>
+
+    <p>
+      <b>Samstag</b><br>
+      Abfahrt Gelsenkirchen ca. 09:00<br>
+      gamescom ab ca. 11:00
+    </p>
+
+    <p>
+      🍴 Café Especial<br>
+      <b>19:30 Uhr</b>
+    </p>
+
+    <p>
+      <b>Sonntag</b><br>
+      Ausschlafen bis 09:00<br>
+      Frühstück im Hyatt<br>
+      gamescom ab ca. 10:30
+    </p>
+
+  </div>
+
+
+
+  <div class="card">
+
+    <h3>
+      🔎 Theo's Watchlist
+    </h3>
+
+    <p>
+      🏎️ Mario Kart World<br>
+      ⛏️ Minecraft<br>
+      ⚡ Pokémon Pokopia<br>
+      🍌 Donkey Kong Bananza<br>
+      🍄 Super Mario Bros. Wonder<br>
+      🗡️ Minecraft Dungeons II<br>
+      ⚽ EA Sports FC<br>
+      🔫 Fortnite<br>
+      🧱 Roblox
+    </p>
+
+    <div class="tip">
+      ⭐ <b>Pflichtstopp:</b><br>
+      Nintendo<br>
+      Halle 9.1 • Stand A10
+    </div>
+
+  </div>
+
+
+
+  <div class="card">
+
+    <h3>
+      🎯 Die Spielregel
+    </h3>
+
+    <p>
+      Samstag ist der
+      <b>SCOUT DAY</b>.
+    </p>
+
+    <p>
+      Erst entdecken,
+      spielen und ausprobieren.
+    </p>
+
+    <p>
+      Erst Samstagabend
+      wählt Theo seine
+      <b>Top 3</b>.
+    </p>
+
+    <p>
+      Diese werden Sonntag
+      zu den drei
+      <b>BOSS MISSIONEN</b>.
+    </p>
+
+  </div>
+
+</section>
+
+
+
+<section
+  id="day1"
+  class="page">
+
+
+  <div class="sectiontitle">
+
+    <h2>
+      🕹️ LEVEL 1 – SCOUT DAY
+    </h2>
+
+    <div>
+      entdecken • spielen • fotografieren
+    </div>
+
+  </div>
+
+
+  <div id="day1main"></div>
+
+
+
+  <div class="sectiontitle">
+
+    <h2>
+      📸 PHOTO HUNT
+    </h2>
+
+    <div>
+      Schnapp dir Extra-XP
+    </div>
+
+  </div>
+
+
+  <div id="day1photos"></div>
+
+
+
+  <div class="sectiontitle">
+
+    <h2>
+      🎲 SIDE QUESTS
+    </h2>
+
+    <div>
+      Bonusmissionen für echte Gamer
+    </div>
+
+  </div>
+
+
+  <div id="day1side"></div>
+
+
+
+  <div class="card">
+
+    <h3>
+      🏆 SCOUT REPORT
+    </h3>
+
+    <p class="small">
+      Erst am Samstagabend entscheiden:
+      Welche drei Sachen müssen wir morgen
+      unbedingt schaffen?
+    </p>
+
+
+    <input
+      id="top1"
+      placeholder="🥇 Boss 1 – Theos Favorit">
+
+    <input
+      id="top2"
+      placeholder="🥈 Boss 2">
+
+    <input
+      id="top3"
+      placeholder="🥉 Boss 3">
+
+
+    <div class="tip">
+      👾 Sobald alle drei eingetragen sind,
+      wird das Boss-Level für Sonntag freigeschaltet.
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<section
+  id="day2"
+  class="page">
+
+
+  <div class="sectiontitle">
+
+    <h2>
+      👾 FINAL LEVEL – BOSS DAY
+    </h2>
+
+    <div>
+      ausschlafen • frühstücken • Bosse besiegen
+    </div>
+
+  </div>
+
+
+  <div id="bosses"></div>
+
+
+
+  <div class="sectiontitle">
+
+    <h2>
+      🗺️ SONNTAGS-MISSION
+    </h2>
+
+  </div>
+
+
+  <div id="day2main"></div>
+
+
+
+  <div class="sectiontitle">
+
+    <h2>
+      📸 FINAL PHOTO QUESTS
+    </h2>
+
+  </div>
+
+
+  <div id="day2photos"></div>
+
+
+
+  <div class="sectiontitle">
+
+    <h2>
+      🏅 ACHIEVEMENTS
+    </h2>
+
+  </div>
+
+
+  <div id="achievements"></div>
+
+
+
+  <div
+    id="final"
+    class="final">
+
+    <div class="trophy">
+      🏆
+    </div>
+
+    <h2>
+      MISSION COMPLETE
+    </h2>
+
+    <p>
+      Papa & Theo haben die<br>
+      <b>GAMECOM MISSION 2026</b><br>
+      geschafft!
+    </p>
+
+    <div>
+      ⭐ LEGENDARY TEAM ⭐
+    </div>
+
+  </div>
+
+
+  <div class="resetbox">
+
+    <button
+      id="reset"
+      class="reset">
+      Spielstand zurücksetzen
+    </button>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+<script>
+
+const MAIN_DAY1 = [
+
+{
+  id:"arrival",
+  icon:"🚗",
+  time:"09:00",
+  title:"MISSION START",
+  desc:"Abfahrt in Gelsenkirchen",
+  xp:100,
+  color:"#7c3aed"
+},
+
+{
+  id:"base",
+  icon:"🏨",
+  time:"ca. 10:30",
+  title:"BASE ERREICHT",
+  desc:"Hyatt – Auto abstellen und Gepäck abgeben",
+  xp:100,
+  color:"#2563eb"
+},
+
+{
+  id:"entrance",
+  icon:"🎮",
+  time:"ca. 11:00",
+  title:"GAME ON!",
+  desc:"gamescom betreten",
+  xp:100,
+  color:"#06b6d4"
+},
+
+{
+  id:"scout1",
+  icon:"🕵️",
+  time:"11:00–13:30",
+  title:"SCOUT RUN",
+  desc:"Stände entdecken und Favoriten merken",
+  xp:150,
+  color:"#84cc16"
+},
+
+{
+  id:"food1",
+  icon:"🍕",
+  time:"13:30",
+  title:"ENERGY BOOST",
+  desc:"Essen, trinken und kurz chillen",
+  xp:100,
+  color:"#f97316"
+},
+
+{
+  id:"nintendo",
+  icon:"🍄",
+  time:"Nachmittag",
+  title:"NINTENDO BASE",
+  desc:"Halle 9.1 • Stand A10 finden",
+  xp:200,
+  color:"#ef4444"
+},
+
+{
+  id:"gaming",
+  icon:"🕹️",
+  time:"Nachmittag",
+  title:"PLAYTEST",
+  desc:"Mindestens drei Spiele ausprobieren",
+  xp:200,
+  color:"#7c3aed"
+},
+
+{
+  id:"hotel",
+  icon:"💾",
+  time:"ca. 18:00",
+  title:"SAVE POINT",
+  desc:"Zurück zum Hyatt und Pause",
+  xp:100,
+  color:"#2563eb"
+},
+
+{
+  id:"dinner",
+  icon:"🌮",
+  time:"19:30",
+  title:"BOSS FOOD",
+  desc:"Café Especial",
+  xp:150,
+  color:"#f97316"
+}
+
+];
+
+
+const PHOTO_DAY1 = [
+
+{
+  id:"photoEntrance",
+  icon:"📸",
+  title:"SPAWN POINT SHOT",
+  desc:"Foto vor dem gamescom-Eingang",
+  xp:150
+},
+
+{
+  id:"photoDuo",
+  icon:"🤳",
+  title:"DUO SHOT",
+  desc:"Papa-&-Theo-Selfie auf der Messe",
+  xp:150
+},
+
+{
+  id:"photoBooth",
+  icon:"✨",
+  title:"LEGENDARY BOOTH",
+  desc:"Foto vom coolsten Stand",
+  xp:150
+},
+
+{
+  id:"photoCharacter",
+  icon:"🦸",
+  title:"CHARACTER HUNT",
+  desc:"Foto mit einer Spielfigur oder einem Charakter",
+  xp:150
+},
+
+{
+  id:"photoCosplay",
+  icon:"🥷",
+  title:"COSPLAY SPOT",
+  desc:"Cooles Cosplay entdecken und mit Erlaubnis fotografieren",
+  xp:150
+},
+
+{
+  id:"photoLoot",
+  icon:"🎁",
+  title:"LOOT SHOT",
+  desc:"Foto vom coolsten Merch",
+  xp:150
+}
+
+];
+
+
+const SIDE_DAY1 = [
+
+{
+  id:"race",
+  icon:"🏎️",
+  title:"SPEED RUN",
+  desc:"Ein Rennspiel spielen",
+  xp:150
+},
+
+{
+  id:"minecraft",
+  icon:"⛏️",
+  title:"BLOCK MASTER",
+  desc:"Etwas aus der Minecraft-Welt entdecken",
+  xp:150
+},
+
+{
+  id:"pokemon",
+  icon:"⚡",
+  title:"POKÉMON HUNT",
+  desc:"Pokémon auf der Messe finden",
+  xp:150
+},
+
+{
+  id:"surprise",
+  icon:"❓",
+  title:"SECRET DISCOVERY",
+  desc:"Ein cooles Spiel finden, das vorher nicht auf der Liste stand",
+  xp:200
+},
+
+{
+  id:"loot",
+  icon:"🛍️",
+  title:"LOOT HUNTER",
+  desc:"Das coolste Merch der Messe finden",
+  xp:100
+}
+
+];
+
+
+const MAIN_DAY2 = [
+
+{
+  id:"sleep",
+  icon:"😴",
+  time:"bis 09:00",
+  title:"SLEEP MODE",
+  desc:"Ausschlafen",
+  xp:100,
+  color:"#7c3aed"
+},
+
+{
+  id:"breakfast",
+  icon:"🥐",
+  time:"09:15–10:00",
+  title:"ENERGY +100",
+  desc:"Gemütlich im Hyatt frühstücken",
+  xp:100,
+  color:"#facc15"
+},
+
+{
+  id:"walk",
+  icon:"🚶",
+  time:"ca. 10:15",
+  title:"START FINAL LEVEL",
+  desc:"Zu Fuß Richtung Messe",
+  xp:100,
+  color:"#06b6d4"
+},
+
+{
+  id:"gameon2",
+  icon:"🎮",
+  time:"ca. 10:30",
+  title:"GAME ON!",
+  desc:"Zurück auf der gamescom",
+  xp:100,
+  color:"#2563eb"
+},
+
+{
+  id:"lunch2",
+  icon:"🍔",
+  time:"ca. 13:00",
+  title:"HEALING POINT",
+  desc:"Mittagspause und trinken",
+  xp:100,
+  color:"#84cc16"
+},
+
+{
+  id:"freeplay",
+  icon:"🕹️",
+  time:"danach",
+  title:"FREE PLAY",
+  desc:"Lieblingsspiele, Merch und verpasste Sachen",
+  xp:150,
+  color:"#f97316"
+}
+
+];
+
+
+const PHOTO_DAY2 = [
+
+{
+  id:"victory",
+  icon:"🏆",
+  title:"VICTORY SHOT",
+  desc:"Papa-&-Theo-Foto nach den drei Boss-Missionen",
+  xp:250
+},
+
+{
+  id:"bestMoment",
+  icon:"❤️",
+  title:"BEST MOMENT",
+  desc:"Foto von Theos Lieblingsmoment des Wochenendes",
+  xp:200
+},
+
+{
+  id:"finalSelfie",
+  icon:"😎",
+  title:"FINAL SELFIE",
+  desc:"Letztes gamescom-Selfie vor der Heimfahrt",
+  xp:150
+}
+
+];
+
+
+const BOSS_XP = 300;
+
+
+const STORAGE_KEY =
+  "papa_theo_gamecom_v4";
+
+
+let state =
+  loadState();
+
+
+function defaultState(){
+
+  return{
+
+    done:{},
+
+    bosses:[
+      false,
+      false,
+      false
+    ],
+
+    top:[
+      "",
+      "",
+      ""
+    ]
+
+  };
+
+}
+
+
+function loadState(){
+
+  try{
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem(
+          STORAGE_KEY
+        )
+      );
+
+    return saved
+      ?
+      {
+        ...defaultState(),
+        ...saved
+      }
+      :
+      defaultState();
+
+  }
+  catch(e){
+
+    return defaultState();
+
+  }
+
+}
+
+
+function save(){
+
+  state.top = [
+
+    document
+      .getElementById("top1")
+      .value,
+
+    document
+      .getElementById("top2")
+      .value,
+
+    document
+      .getElementById("top3")
+      .value
+
+  ];
+
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(state)
+  );
+
+}
+
+
+function allQuests(){
+
+  return[
+    ...MAIN_DAY1,
+    ...PHOTO_DAY1,
+    ...SIDE_DAY1,
+    ...MAIN_DAY2,
+    ...PHOTO_DAY2
+  ];
+
+}
+
+
+function showXP(amount){
+
+  const flash =
+    document.getElementById(
+      "flash"
+    );
+
+  flash.textContent =
+    "+" + amount + " XP!";
+
+  flash.classList.add(
+    "show"
+  );
+
+
+  setTimeout(
+    ()=>{
+
+      flash.classList.remove(
+        "show"
+      );
+
+    },
+    900
+  );
+
+}
+
+
+function toggleQuest(
+  id,
+  xp
+){
+
+  const before =
+    !!state.done[id];
+
+  state.done[id] =
+    !before;
+
+
+  if(!before){
+
+    showXP(xp);
+
+  }
+
+
+  save();
+
+  render();
+
+}
+
+
+function questCard(
+  quest,
+  type
+){
+
+  const done =
+    !!state.done[
+      quest.id
+    ];
+
+
+  const card =
+    document.createElement(
+      "div"
+    );
+
+
+  card.className =
+    "card quest "
+    + type
+    + (done
+      ? " done"
+      : "");
+
+
+  const icon =
+    document.createElement(
+      "div"
+    );
+
+
+  icon.className =
+    "icon";
+
+
+  icon.style.background =
+    quest.color
+    || (
+      type === "photo"
+      ? "#4a1737"
+      : type === "side"
+      ? "#10354a"
+      : "#273247"
+    );
+
+
+  icon.textContent =
+    quest.icon;
+
+
+  const content =
+    document.createElement(
+      "div"
+    );
+
+
+  content.className =
+    "questcontent";
+
+
+  if(quest.time){
+
+    const time =
+      document.createElement(
+        "div"
+      );
+
+    time.className =
+      "time";
+
+    time.style.background =
+      quest.color;
+
+    time.textContent =
+      quest.time;
+
+    content.appendChild(
+      time
+    );
+
+  }
+
+
+  const name =
+    document.createElement(
+      "div"
+    );
+
+  name.className =
+    "questname";
+
+  name.textContent =
+    quest.title;
+
+
+  const desc =
+    document.createElement(
+      "div"
+    );
+
+  desc.className =
+    "questdesc";
+
+  desc.textContent =
+    quest.desc;
+
+
+  const reward =
+    document.createElement(
+      "div"
+    );
+
+  reward.className =
+    "reward";
+
+  reward.textContent =
+    "+" + quest.xp + " XP";
+
+
+  content.appendChild(
+    name
+  );
+
+  content.appendChild(
+    desc
+  );
+
+  content.appendChild(
+    reward
+  );
+
+
+  const button =
+    document.createElement(
+      "button"
+    );
+
+  button.className =
+    "tick";
+
+  button.type =
+    "button";
+
+  button.textContent =
+    done
+    ? "✓"
+    : "";
+
+
+  button.addEventListener(
+    "click",
+    ()=>{
+
+      toggleQuest(
+        quest.id,
+        quest.xp
+      );
+
+    }
+  );
+
+
+  card.appendChild(
+    icon
+  );
+
+  card.appendChild(
+    content
+  );
+
+  card.appendChild(
+    button
+  );
+
+
+  return card;
+
+}
+
+
+function renderQuestList(
+  list,
+  target,
+  type
+){
+
+  const root =
+    document.getElementById(
+      target
+    );
+
+
+  root.innerHTML =
+    "";
+
+
+  list.forEach(
+    q=>{
+
+      root.appendChild(
+        questCard(
+          q,
+          type
+        )
+      );
+
+    }
+  );
+
+}
+
+
+function bossesUnlocked(){
+
+  return state.top.every(
+    name=>
+      name.trim().length > 0
+  );
+
+}
+
+
+function renderBosses(){
+
+  const root =
+    document.getElementById(
+      "bosses"
+    );
+
+
+  root.innerHTML =
+    "";
+
+
+  if(
+    !bossesUnlocked()
+  ){
+
+    const locked =
+      document.createElement(
+        "div"
+      );
+
+
+    locked.className =
+      "card lock locked";
+
+
+    locked.innerHTML = `
+
+      <div class="lockicon">
+        🔒
+      </div>
+
+      <h3>
+        BOSS LEVEL GESPERRT
+      </h3>
+
+      <div class="small">
+        Erst Samstagabend
+        Theos Top 3 auswählen.
+      </div>
+
+    `;
+
+
+    root.appendChild(
+      locked
+    );
+
+
+    return;
+
+  }
+
+
+  state.top.forEach(
+    (name,index)=>{
+
+      const done =
+        !!state.bosses[
+          index
+        ];
+
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+
+      card.className =
+        "card boss quest"
+        + (
+          done
+          ? " done"
+          : ""
+        );
+
+
+      const content =
+        document.createElement(
+          "div"
+        );
+
+
+      content.className =
+        "questcontent";
+
+
+      content.innerHTML = `
+
+        <div class="bosshead">
+
+          <span class="bosslabel">
+            BOSS ${index+1}
+          </span>
+
+          <span>
+            👾
+          </span>
+
+        </div>
+
+        <div
+          class="questname"
+          style="margin-top:10px">
+
+          ${escapeHTML(name)}
+
+        </div>
+
+        <div class="questdesc">
+          Theos Hauptmission
+        </div>
+
+        <div class="reward">
+          +${BOSS_XP} XP
+        </div>
+
+      `;
+
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type =
+        "button";
+
+
+      button.className =
+        "tick";
+
+
+      button.textContent =
+        done
+        ? "✓"
+        : "";
+
+
+      button.addEventListener(
+        "click",
+        ()=>{
+
+          const before =
+            !!state.bosses[
+              index
+            ];
+
+
+          state.bosses[
+            index
+          ] =
+            !before;
+
+
+          if(!before){
+
+            showXP(
+              BOSS_XP
+            );
+
+          }
+
+
+          save();
+
+          render();
+
+        }
+      );
+
+
+      card.appendChild(
+        content
+      );
+
+      card.appendChild(
+        button
+      );
+
+
+      root.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+function escapeHTML(text){
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+  div.textContent =
+    text;
+
+  return div.innerHTML;
+
+}
+
+
+function totalXP(){
+
+  let xp =
+    0;
+
+
+  allQuests()
+  .forEach(
+    quest=>{
+
+      if(
+        state.done[
+          quest.id
+        ]
+      ){
+
+        xp +=
+          quest.xp;
+
+      }
+
+    }
+  );
+
+
+  state.bosses
+  .forEach(
+    done=>{
+
+      if(done){
+
+        xp +=
+          BOSS_XP;
+
+      }
+
+    }
+  );
+
+
+  return xp;
+
+}
+
+
+function maximumXP(){
+
+  return(
+    allQuests()
+    .reduce(
+      (
+        sum,
+        quest
+      )=>
+        sum
+        +
+        quest.xp,
+      0
+    )
+    +
+    BOSS_XP * 3
+  );
+
+}
+
+
+function levelData(xp){
+
+  if(xp < 800){
+
+    return[
+      1,
+      "ROOKIE"
+    ];
+
+  }
+
+
+  if(xp < 1800){
+
+    return[
+      2,
+      "SCOUT"
+    ];
+
+  }
+
+
+  if(xp < 3000){
+
+    return[
+      3,
+      "PRO GAMER"
+    ];
+
+  }
+
+
+  if(xp < 4200){
+
+    return[
+      4,
+      "ELITE PLAYER"
+    ];
+
+  }
+
+
+  return[
+    5,
+    "GAMECOM LEGEND"
+  ];
+
+}
+
+
+function achievementData(){
+
+  const photoCount =
+    [
+      ...PHOTO_DAY1,
+      ...PHOTO_DAY2
+    ]
+    .filter(
+      q=>
+        state.done[
+          q.id
+        ]
+    )
+    .length;
+
+
+  const sideCount =
+    SIDE_DAY1
+    .filter(
+      q=>
+        state.done[
+          q.id
+        ]
+    )
+    .length;
+
+
+  const bosses =
+    state.bosses
+    .filter(Boolean)
+    .length;
+
+
+  return[
+
+    {
+      icon:"📸",
+      title:"PHOTO MASTER",
+      desc:"5 Foto-Missionen geschafft",
+      unlocked:
+        photoCount >= 5
+    },
+
+    {
+      icon:"🕵️",
+      title:"SUPER SCOUT",
+      desc:"Alle Side Quests geschafft",
+      unlocked:
+        sideCount
+        ===
+        SIDE_DAY1.length
+    },
+
+    {
+      icon:"👾",
+      title:"BOSS HUNTER",
+      desc:"Alle drei Bosse besiegt",
+      unlocked:
+        bosses === 3
+    },
+
+    {
+      icon:"🍄",
+      title:"NINTENDO EXPLORER",
+      desc:"Nintendo Base gefunden",
+      unlocked:
+        !!state.done[
+          "nintendo"
+        ]
+    },
+
+    {
+      icon:"🏆",
+      title:"LEGENDARY DUO",
+      desc:"Victory Shot geschafft",
+      unlocked:
+        !!state.done[
+          "victory"
+        ]
+    }
+
+  ];
+
+}
+
+
+function renderAchievements(){
+
+  const root =
+    document.getElementById(
+      "achievements"
+    );
+
+
+  root.innerHTML =
+    "";
+
+
+  achievementData()
+  .forEach(
+    achievement=>{
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+
+      card.className =
+        "card achievement "
+        +
+        (
+          achievement.unlocked
+          ? "unlocked"
+          : "lockedAchievement"
+        );
+
+
+      card.innerHTML = `
+
+        <div
+          class="achievementIcon">
+
+          ${
+            achievement.unlocked
+            ?
+            achievement.icon
+            :
+            "🔒"
+          }
+
+        </div>
+
+        <div>
+
+          <div class="questname">
+
+            ${
+              achievement.title
+            }
+
+          </div>
+
+          <div class="questdesc">
+
+            ${
+              achievement.desc
+            }
+
+          </div>
+
+        </div>
+
+      `;
+
+
+      root.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+function missionComplete(){
+
+  const bossesComplete =
+    state.bosses
+    .filter(Boolean)
+    .length === 3;
+
+
+  const victory =
+    !!state.done[
+      "victory"
+    ];
+
+
+  return(
+    bossesComplete
+    &&
+    victory
+  );
+
+}
+
+
+function renderXP(){
+
+  const xp =
+    totalXP();
+
+
+  const max =
+    maximumXP();
+
+
+  const percent =
+    Math.min(
+      100,
+      Math.round(
+        xp / max * 100
+      )
+    );
+
+
+  const level =
+    levelData(
+      xp
+    );
+
+
+  document
+  .getElementById(
+    "xp"
+  )
+  .textContent =
+    xp + " XP";
+
+
+  document
+  .getElementById(
+    "percent"
+  )
+  .textContent =
+    percent + " %";
+
+
+  document
+  .getElementById(
+    "xpbar"
+  )
+  .style.width =
+    percent + "%";
+
+
+  document
+  .getElementById(
+    "level"
+  )
+  .textContent =
+    "LEVEL "
+    +
+    level[0];
+
+
+  document
+  .getElementById(
+    "rank"
+  )
+  .textContent =
+    level[1];
+
+}
+
+
+function render(){
+
+  renderQuestList(
+    MAIN_DAY1,
+    "day1main",
+    "main"
+  );
+
+
+  renderQuestList(
+    PHOTO_DAY1,
+    "day1photos",
+    "photo"
+  );
+
+
+  renderQuestList(
+    SIDE_DAY1,
+    "day1side",
+    "side"
+  );
+
+
+  renderQuestList(
+    MAIN_DAY2,
+    "day2main",
+    "main"
+  );
+
+
+  renderQuestList(
+    PHOTO_DAY2,
+    "day2photos",
+    "photo"
+  );
+
+
+  renderBosses();
+
+  renderAchievements();
+
+  renderXP();
+
+
+  document
+  .getElementById(
+    "final"
+  )
+  .classList
+  .toggle(
+    "show",
+    missionComplete()
+  );
+
+}
+
+
+
+[
+  "top1",
+  "top2",
+  "top3"
+]
+.forEach(
+  (
+    id,
+    index
+  )=>{
+
+    const input =
+      document.getElementById(
+        id
+      );
+
+
+    input.value =
+      state.top[
+        index
+      ]
+      || "";
+
+
+    input.addEventListener(
+      "input",
+      ()=>{
+
+        state.top[
+          index
+        ] =
+          input.value;
+
+
+        save();
+
+        renderBosses();
+
+      }
+    );
+
+  }
+);
+
+
+
+document
+.querySelectorAll(
+  ".tab"
+)
+.forEach(
+  button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        document
+        .querySelectorAll(
+          ".tab"
+        )
+        .forEach(
+          b=>
+            b.classList.remove(
+              "active"
+            )
+        );
+
+
+        document
+        .querySelectorAll(
+          ".page"
+        )
+        .forEach(
+          page=>
+            page.classList.remove(
+              "active"
+            )
+        );
+
+
+        button
+        .classList
+        .add(
+          "active"
+        );
+
+
+        document
+        .getElementById(
+          button.dataset.page
+        )
+        .classList
+        .add(
+          "active"
+        );
+
+      }
+    );
+
+  }
+);
+
+
+
+document
+.getElementById(
+  "reset"
+)
+.addEventListener(
+  "click",
+  ()=>{
+
+    const confirmed =
+      confirm(
+        "Wirklich den kompletten Spielstand löschen?"
+      );
+
+
+    if(!confirmed){
+
+      return;
+
+    }
+
+
+    state =
+      defaultState();
+
+
+    localStorage
+    .removeItem(
+      STORAGE_KEY
+    );
+
+
+    location.reload();
+
+  }
+);
+
+
+
+render();
+
+</script>
+
+</body>
+</html>
