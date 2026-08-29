@@ -1,0 +1,3206 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#090d18">
+
+<title>Papa & Theo – gamescom Mission 2026</title>
+
+<style>
+:root{
+  --bg:#090d18;
+  --card:#151c2e;
+  --txt:#fff;
+  --muted:#9ba8bd;
+  --cyan:#22d3ee;
+  --purple:#8b5cf6;
+  --yellow:#facc15;
+  --green:#84cc16;
+  --pink:#ec4899;
+  --red:#ef4444;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at top,#172554,#090d18 38%);
+  color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+main{
+  max-width:760px;
+  margin:auto;
+  padding:14px 14px 100px;
+}
+
+.hero{
+  padding:20px;
+  border-radius:26px;
+  background:linear-gradient(135deg,#6d28d9,#2563eb);
+}
+
+.kicker{
+  font-size:12px;
+  font-weight:1000;
+  letter-spacing:.14em;
+  color:var(--yellow);
+}
+
+h1{
+  margin:6px 0 4px;
+  font-size:31px;
+}
+
+.sub{
+  opacity:.9;
+  font-weight:700;
+}
+
+.xpRow{
+  display:flex;
+  justify-content:space-between;
+  margin-top:15px;
+  font-weight:900;
+}
+
+.bar{
+  height:14px;
+  background:#ffffff25;
+  border-radius:99px;
+  overflow:hidden;
+  margin-top:7px;
+}
+
+.bar>div{
+  height:100%;
+  background:linear-gradient(90deg,var(--yellow),var(--green));
+  transition:.4s;
+}
+
+.lifeBar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:12px;
+  padding:10px;
+  border-radius:14px;
+  background:#ffffff12;
+  font-weight:900;
+}
+
+.lifeIcons{
+  font-size:17px;
+  letter-spacing:1px;
+}
+
+.tabs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+  margin:14px 0;
+}
+
+.tab{
+  border:0;
+  border-radius:13px;
+  background:#182238;
+  color:#fff;
+  padding:11px 3px;
+  font-weight:900;
+  font-size:12px;
+}
+
+.tab.active{
+  background:var(--cyan);
+  color:#06141a;
+}
+
+.page{display:none}
+.page.active{display:block}
+
+.card{
+  background:var(--card);
+  border:1px solid #ffffff16;
+  border-radius:19px;
+  padding:15px;
+  margin:10px 0;
+}
+
+.card h3{
+  margin:0 0 7px;
+}
+
+.muted{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.feed{
+  display:flex;
+  gap:11px;
+  align-items:center;
+}
+
+.ico{
+  width:50px;
+  height:50px;
+  min-width:50px;
+  border-radius:15px;
+  background:#27334d;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+}
+
+.grow{
+  flex:1;
+  min-width:0;
+}
+
+.name{
+  font-weight:950;
+}
+
+.desc{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.xp{
+  font-size:12px;
+  color:var(--yellow);
+  font-weight:900;
+  margin-top:5px;
+}
+
+.time{
+  font-size:11px;
+  font-weight:900;
+  background:#ffffff12;
+  border-radius:8px;
+  padding:4px 7px;
+  display:inline-block;
+  margin-bottom:5px;
+}
+
+.tick{
+  width:42px;
+  height:42px;
+  min-width:42px;
+  border:2px solid #ffffff44;
+  border-radius:13px;
+  background:transparent;
+  color:#fff;
+  font-size:22px;
+}
+
+.done{
+  opacity:.55;
+}
+
+.done .tick{
+  background:var(--green);
+  border-color:var(--green);
+}
+
+.photoBtn,
+.mainBtn,
+.smallBtn{
+  border:0;
+  border-radius:13px;
+  padding:12px 14px;
+  color:white;
+  font-weight:900;
+}
+
+.photoBtn{
+  background:var(--pink);
+  margin-top:11px;
+}
+
+.mainBtn{
+  width:100%;
+  background:linear-gradient(135deg,#7c3aed,#2563eb);
+  margin-top:10px;
+}
+
+.mainBtn:disabled{
+  opacity:.4;
+}
+
+.smallBtn{
+  background:#29354e;
+}
+
+.photoImg{
+  width:100%;
+  max-height:300px;
+  object-fit:cover;
+  border-radius:14px;
+  margin-top:10px;
+}
+
+.target{
+  border-left:4px solid var(--purple);
+}
+
+.target.doneTarget{
+  opacity:.6;
+}
+
+.chips{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.hallGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.hall{
+  border:1px solid #ffffff18;
+  background:#111a2c;
+  color:white;
+  border-radius:14px;
+  padding:12px 6px;
+  font-weight:900;
+}
+
+.hall.on{
+  background:var(--purple);
+}
+
+.reward{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  padding:12px;
+  background:#0e1728;
+  border-radius:14px;
+  margin:8px 0;
+}
+
+.reward.unlocked{
+  background:#132619;
+  border:1px solid #84cc1655;
+}
+
+.locked{
+  opacity:.45;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  margin-top:8px;
+  border-radius:13px;
+  border:1px solid #ffffff20;
+  background:#0a1222;
+  color:white;
+  font-size:16px;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000c;
+  z-index:1000;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.box{
+  width:min(430px,100%);
+  background:#131c2e;
+  border-radius:22px;
+  padding:20px;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.boss{
+  background:linear-gradient(135deg,#351765,#172035);
+  border:1px solid #8b5cf6;
+}
+
+.bossTag{
+  display:inline-block;
+  background:var(--yellow);
+  color:#111;
+  border-radius:8px;
+  padding:4px 8px;
+  font-size:11px;
+  font-weight:1000;
+}
+
+.section{
+  margin:21px 3px 8px;
+}
+
+.section b{
+  font-size:20px;
+}
+
+.mapbox{
+  background:linear-gradient(135deg,#172554,#111827);
+  border-radius:20px;
+  padding:16px;
+}
+
+.official{
+  display:block;
+  text-align:center;
+  text-decoration:none;
+  background:var(--cyan);
+  color:#071318;
+  border-radius:14px;
+  padding:14px;
+  font-weight:1000;
+  margin-top:12px;
+}
+
+.standRow{
+  background:#0d1628;
+  border:1px solid #ffffff14;
+  border-radius:14px;
+  padding:12px;
+  margin-top:9px;
+}
+
+.standTop{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.standMeta{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.goalBtn,
+.top3Btn{
+  border:1px solid #ffffff22;
+  background:#17233a;
+  color:white;
+  border-radius:11px;
+  padding:9px 11px;
+  font-weight:900;
+}
+
+.goalBtn.selected{
+  background:#ef4444;
+}
+
+.top3Btn.on{
+  background:var(--yellow);
+  color:#111;
+}
+
+.goalBadge{
+  display:inline-flex;
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:11px;
+  font-weight:900;
+  background:#ffffff12;
+}
+
+.mapHint{
+  padding:10px 12px;
+  border-radius:12px;
+  background:#ffffff0b;
+  margin-top:10px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.guideGrid{
+  display:grid;
+  gap:8px;
+}
+
+.guideStep{
+  background:#0f192b;
+  border-radius:13px;
+  padding:11px;
+}
+
+.final{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  background:radial-gradient(circle,#52228b,#090d18 65%);
+  text-align:center;
+  padding:35px 18px;
+  overflow:auto;
+}
+
+.final.show{
+  display:block;
+}
+
+.big{
+  font-size:42px;
+  font-weight:1000;
+}
+
+.score{
+  font-size:34px;
+  color:var(--yellow);
+  font-weight:1000;
+  margin:18px;
+}
+
+.missionBadge{
+  display:inline-block;
+  background:#22d3ee20;
+  color:var(--cyan);
+  border:1px solid #22d3ee55;
+  border-radius:999px;
+  padding:4px 8px;
+  font-size:11px;
+  font-weight:900;
+  margin-bottom:5px;
+}
+
+@media(max-width:390px){
+  .hallGrid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="pinModal" class="modal">
+  <div class="box">
+    <h3>🔐 Papa-Check</h3>
+    <div id="pinMsg" class="muted"></div>
+
+    <input
+      id="pin"
+      type="password"
+      inputmode="numeric"
+      placeholder="Papa-PIN"
+    >
+
+    <div id="pinErr"></div>
+
+    <div class="row">
+      <button id="pinCancel" class="smallBtn">Abbrechen</button>
+      <button id="pinOK" class="photoBtn">Bestätigen</button>
+    </div>
+  </div>
+</div>
+
+<div id="final" class="final">
+  <div style="font-size:80px">🏆</div>
+  <div class="big">MISSION COMPLETE</div>
+  <h2>PAPA & THEO</h2>
+
+  <div id="finalScore" class="score"></div>
+  <h2 id="finalRank"></h2>
+  <div id="finalRewards"></div>
+
+  <button
+    class="mainBtn"
+    onclick="document.getElementById('final').classList.remove('show')"
+  >
+    Zurück
+  </button>
+</div>
+
+<main>
+
+<div class="hero">
+
+  <div class="kicker">
+    GAMECOM MISSION 2026
+  </div>
+
+  <h1>PAPA & THEO</h1>
+
+  <div class="sub">
+    Scout. Finden. Zocken. Fotos. Bosse besiegen.
+  </div>
+
+  <div class="xpRow">
+    <span id="rank"></span>
+    <span id="xpText"></span>
+  </div>
+
+  <div class="bar">
+    <div id="xpBar"></div>
+  </div>
+
+  <div class="lifeBar">
+    <span>❤️ LEBEN</span>
+    <span id="lifeIcons" class="lifeIcons"></span>
+    <span id="lifeText"></span>
+  </div>
+
+</div>
+
+<div class="tabs">
+
+  <button class="tab active" data-p="mission">
+    🎮 Mission
+  </button>
+
+  <button class="tab" data-p="targets">
+    ❤️ Ziele
+  </button>
+
+  <button class="tab" data-p="map">
+    🗺️ Map
+  </button>
+
+  <button class="tab" data-p="score">
+    🏆 Score
+  </button>
+
+</div>
+
+
+<!-- MISSION -->
+
+<section id="mission" class="page active">
+
+<div class="card">
+
+  <h3>🎯 THEOS MISSION ROUTE</h3>
+
+  <div id="routeStats" class="muted"></div>
+
+  <div id="currentHallText"></div>
+
+</div>
+
+
+<div class="card">
+
+  <h3>⚡ SO FUNKTIONIERT'S</h3>
+
+  <div class="guideGrid">
+
+    <div class="guideStep">
+      1️⃣ Mission geschafft → Haken oder Foto.
+    </div>
+
+    <div class="guideStep">
+      2️⃣ Map öffnen → interessante Aussteller mit ❤️ speichern.
+    </div>
+
+    <div class="guideStep">
+      3️⃣ Samstagabend drei Favoriten mit 🏆 auswählen.
+    </div>
+
+    <div class="guideStep">
+      4️⃣ Papa bestätigt einmal die TOP 3.
+    </div>
+
+    <div class="guideStep">
+      5️⃣ Sonntag werden daraus BOSS 1, BOSS 2 und BOSS 3.
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="section">
+  <b>🕵️ MESSE-MISSIONEN</b>
+</div>
+
+<div id="detectorArea"></div>
+
+
+<div id="bossArea"></div>
+
+
+<div class="section">
+  <b>🕹️ TAGES-MISSIONEN</b>
+</div>
+
+<div id="feed"></div>
+
+<div id="top3Area"></div>
+
+</section>
+
+
+
+<!-- ZIELE -->
+
+<section id="targets" class="page">
+
+<div class="card">
+
+  <h3>❤️ THEOS ZIELE</h3>
+
+  <div class="muted">
+    Interessante Aussteller auf der Map mit ❤️ speichern.
+    Samstagabend wählt Theo daraus seine drei Favoriten.
+  </div>
+
+  <div id="top3Counter" class="mapHint"></div>
+
+</div>
+
+<div id="targetsList"></div>
+
+
+<div class="card">
+
+  <h3>➕ Eigenes Ziel</h3>
+
+  <input
+    id="customName"
+    placeholder="Spiel / Stand / Aussteller"
+  >
+
+  <div class="row">
+
+    <input
+      id="customHall"
+      placeholder="Halle"
+    >
+
+    <input
+      id="customStand"
+      placeholder="Stand"
+    >
+
+  </div>
+
+  <button id="addTarget" class="mainBtn">
+    ZIEL HINZUFÜGEN
+  </button>
+
+</div>
+
+</section>
+
+
+
+<!-- MAP -->
+
+<section id="map" class="page">
+
+<div class="mapbox">
+
+  <h3>🗺️ GAMECOM MAP</h3>
+
+  <div class="muted">
+    Halle auswählen oder direkt nach einem Aussteller suchen.
+  </div>
+
+  <input
+    id="exhibitorSearch"
+    placeholder="🔎 Aussteller suchen …"
+    oninput="renderMap()"
+  >
+
+  <div
+    id="hallButtons"
+    class="hallGrid"
+    style="margin-top:13px"
+  ></div>
+
+  <div class="mapHint">
+    ❤️ antippen → Aussteller erscheint sofort unter Theos Ziele.
+  </div>
+
+  <a
+    class="official"
+    href="https://exhibitors.gamescom.global/de/gamescom-aussteller/hallenplan/"
+    target="_blank"
+  >
+    🧭 OFFIZIELLEN HALLENPLAN ÖFFNEN
+  </a>
+
+</div>
+
+
+<div class="section">
+  <b>🎮 AUSSTELLER / STÄNDE</b>
+</div>
+
+<div id="hallTargets"></div>
+
+</section>
+
+
+
+<!-- SCORE -->
+
+<section id="score" class="page">
+
+<div class="card">
+
+  <h3>🎁 REWARD TRACK</h3>
+
+  <div id="rewards"></div>
+
+</div>
+
+
+<div class="card">
+
+  <h3>📊 MISSION STATUS</h3>
+
+  <div id="stats"></div>
+
+</div>
+
+
+<button id="finish" class="mainBtn"></button>
+
+</section>
+
+</main>
+
+
+<script>
+
+const PIN="1603";
+
+const KEY="papa_theo_v13";
+
+const MAX=5000;
+
+
+const rewards=[
+
+{
+  xp:3000,
+  icon:"🍟",
+  rank:"🥉 GAMECOM SCOUT",
+  text:"McDonald’s nach der gamescom"
+},
+
+{
+  xp:4000,
+  icon:"🎬",
+  rank:"🥈 PRO GAMER",
+  text:"Kino mit Papa"
+},
+
+{
+  xp:4750,
+  icon:"🎁",
+  rank:"🏆 GAMECOM LEGEND",
+  text:"30 € Loot – Theo sucht sich etwas aus"
+}
+
+];
+
+
+const DETECTOR=[
+
+{
+  id:"d1",
+  icon:"🍄",
+  name:"NINTENDO FINDER",
+  desc:"Findet Nintendo in Halle 9.1 – ohne vorher auf die Standnummer zu schauen.",
+  xp:150,
+  mode:"found"
+},
+
+{
+  id:"d2",
+  icon:"🖱️",
+  name:"NYFTER HUNT",
+  desc:"Findet Nyfter in Halle 10.1 und fotografiert das coolste Zubehör.",
+  xp:175,
+  mode:"photo"
+},
+
+{
+  id:"d3",
+  icon:"🏎️",
+  name:"SPEED TEST",
+  desc:"Findet ein Racing Game und spielt mindestens eine Runde.",
+  xp:150,
+  mode:"found"
+},
+
+{
+  id:"d4",
+  icon:"🎮",
+  name:"UNKNOWN GAME",
+  desc:"Findet ein Spiel, das Theo vorher noch nicht kannte.",
+  xp:175,
+  mode:"found"
+},
+
+{
+  id:"d5",
+  icon:"🤯",
+  name:"WOW BOOTH",
+  desc:"Findet den Stand, der euch heute am meisten beeindruckt.",
+  xp:150,
+  mode:"photo"
+},
+
+{
+  id:"d6",
+  icon:"🎁",
+  name:"LOOT DETECTIVE",
+  desc:"Findet etwas, das Theo am liebsten direkt mitnehmen würde.",
+  xp:150,
+  mode:"photo"
+},
+
+{
+  id:"d7",
+  icon:"🥷",
+  name:"COSPLAY HUNT",
+  desc:"Findet ein richtig starkes Cosplay.",
+  xp:150,
+  mode:"photo"
+},
+
+{
+  id:"d8",
+  icon:"👾",
+  name:"INDIE SECRET",
+  desc:"Findet in Halle 10.2 einen Indie-Geheimtipp.",
+  xp:175,
+  mode:"found"
+},
+
+{
+  id:"d9",
+  icon:"❤️",
+  name:"PAPA & THEO PICK",
+  desc:"Findet einen Stand, den ihr beide richtig gut findet.",
+  xp:200,
+  mode:"found"
+},
+
+{
+  id:"d10",
+  icon:"📸",
+  name:"HARDWARE HUNTER",
+  desc:"Findet in Halle 10.1 euer coolstes Stück Gaming-Hardware.",
+  xp:175,
+  mode:"photo"
+}
+
+];
+
+
+const RAW_STANDS=[
+
+["CosBase e.V.","5","A047"],
+["CULTURA ANIME","5.1","B040"],
+["Fangamer","5.1","D025"],
+["Gugu Global","5.1","D030"],
+["Haneda Project","5.1","C013"],
+
+["Expolinker","5.2","C035"],
+["Fantasy En'Counter","5.2","A040a"],
+["Gueye International Events","5.2","C044"],
+
+["Dovetail Games","6","B-060 / C-061"],
+["BlackMill Games","6","B-060 / C-061"],
+["Ubisoft","6","C-011 / B-010"],
+["Crytek","6","C-071 / A-070"],
+["GIANTS Software","6","B-061"],
+["Bandai Namco","6","B-021 / A-020"],
+["PAWPRINT INTERACTIVE","6","C-041"],
+["FOCUS ENTERTAINMENT","6","B-060 / C-061"],
+["astragon","6","B-060 / C-061"],
+["EA SPORTS","6","B-011 / A-010"],
+["Level Infinite","6","C-071 / A-070"],
+["Paradox Interactive","6","C-071 / A-070"],
+["Remedy Entertainment","6","C-071 / A-070"],
+["HoYoverse","6","B-030 / C-031"],
+["Grinding Gear Games","6","B-031"],
+["Secret Mode","6","B-040"],
+["EGG","6","B-050"],
+
+["NetEase Interactive","7","A-051"],
+["Webedia","7","B-051 / C-050"],
+["Hama","7.1","B051 / C050"],
+
+["Snail Games","8","A-041"],
+["Mattel / Hot Wheels","8","B-020"],
+["CD PROJEKT RED","8","B-030 / A-031"],
+["Tencent Games","8","A051 / B050"],
+["MBC Game Studio","8","A-011 / B-010"],
+["Urban Games","8","B053"],
+["FACTORY-C","8.1","B053"],
+
+["Samsung Electronics","9","B-010 / C-011"],
+["Nintendo of Europe","9.1","A10"],
+["Harman Deutschland","9.1","B034 / C035"],
+
+
+["ADHS Deutschland","10.1","F-054"],
+["Aidshilfe Köln","10.1","D-020 / E-021"],
+["Amadeu Antonio Stiftung","10.1","F-011"],
+["ANKA GAMES GROUP","10.1","A035"],
+["AREA 35","10.1","C070 / D071"],
+["ASRock","10.1","B-060"],
+["BAFZA","10.1","F-010"],
+["BALM","10.1","D-038"],
+["Basement Bunker Labs","10.1","A-021"],
+["Behaviour Interactive","10.1","E-072"],
+["Bilibili","10.1","A090"],
+["BIÖG","10.1","A-091 / B-085"],
+["bm – Bildung in Medienberufen","10.1","D-020 / E-021"],
+["Bundesnetzagentur","10.1","D-048"],
+["Bundeswehr","10.1","E-030 / F-031"],
+["Centurion Developments","10.1","A-061"],
+["Chengdu GameTeahouse","10.1","C049"],
+["DATEV","10.1","E-039"],
+["Deutsche Bundesbank","10.1","E-037"],
+["Deutscher Tierschutzbund","10.1","F-080"],
+["Dongguan Suoai Electronics","10.1","E050"],
+["Fandom Snacks","10.1","A071"],
+["Frozen District","10.1","A-042"],
+["Gaming Ohne Grenzen","10.1","D-020 / E-021"],
+["Greenpeace","10.1","A-069"],
+["Gudsen Technology","10.1","A-022"],
+["heise","10.1","E-030 / F-031"],
+["Hochschule für angewandtes Management","10.1","E-010"],
+["Hochschule Kempten","10.1","E-012"],
+["HOLY","10.1","B-080 / C-081"],
+["idealo","10.1","B-042"],
+["INDIE Hub","10.1","D-020 / E-021"],
+["IU Internationale Hochschule","10.1","F-013"],
+["jfc Medienzentrum","10.1","D-020 / E-021"],
+["Jumbo Spiele","10.1","A-019"],
+["KARNOX","10.1","B-048"],
+["Marketpoint","10.1","B-081"],
+["Mediensuchtprävention NRW","10.1","D-020 / E-021"],
+["Müller","10.1","D-070"],
+["Nyfter","10.1","B-032"],
+["PATONA","10.1","C-033"],
+["PIXL VISN","10.1","E-016"],
+["PNY","10.1","A-024"],
+["PXN","10.1","C-041"],
+["RAW FURY","10.1","B-021"],
+["Rheinmetall","10.1","E-031"],
+["SAE Institute","10.1","D-021"],
+["SCS Software","10.1","B-022 / C-023"],
+["SeithCG","10.1","A-087"],
+["Siemens","10.1","D-030"],
+["Spezi","10.1","B-070 / C-071"],
+["Technische Hochschule Ostwestfalen-Lippe","10.1","F-017"],
+["Thermaltake","10.1","D-060 / E-061"],
+["Ukiyo Studios","10.1","F-063"],
+["Universität Osnabrück","10.1","E-018"],
+["Verbraucherzentrale NRW","10.1","F-024"],
+["Völkle Bürostühle","10.1","C-050"],
+["Westdeutsche SpenderZentrale","10.1","A-083"],
+["Whisper Interactive","10.1","A-041"],
+["ZDS Akademie","10.1","siehe Hallenplan"],
+
+
+["2Cap","10.2","E020 / D021"],
+["ATENT GAMES","10.2","F021"],
+["Astrava Entertainment","10.2","F-040 / E-057"],
+["Body of Music","10.2","F011"],
+["DALOAR STUDIOS","10.2","F023"],
+["Dark Jay Studio","10.2","E020 / D021"],
+["Dark Zone Studios","10.2","F010 / E019"],
+["Everheart","10.2","F010 / E019"],
+["Fableware","10.2","D045"],
+["Fachhochschule Münster – ETI","10.2","E042"],
+["Fahrenheit213","10.2","E043"],
+["Failbetter Games","10.2","F010 / E019"],
+["Faliro XR","10.2","E041"],
+["Farom Studio","10.2","F021"],
+["Guild Studio","10.2","E020 / D021"],
+["Guilherme Giacomini","10.2","D045"],
+["Gyan Era Learning Solutions","10.2","D047"],
+["HA Hessen Agentur","10.2","F010 / E019"],
+["HalfSoupLabs","10.2","F010 / E019"],
+["Hamiga Studio","10.2","E051"],
+["Hangzhou Xingfan Advertising Media","10.2","E010 / D011"],
+["Happinet","10.2","E043"],
+["Minnapad","10.2","E-043"],
+["Radical Fish Games","10.2","D-043"],
+["SporeWood Games","10.2","D-043"],
+["TH Köln – Cologne Game Lab","10.2","E-042"],
+["Universität Bayreuth","10.2","E-042"]
+
+];
+
+
+const MASTER_STANDS=
+RAW_STANDS.map((x,i)=>({
+
+  id:"gc26_"+i,
+
+  icon:"🎮",
+
+  name:x[0],
+
+  hall:x[1],
+
+  stand:x[2],
+
+  detail:"gamescom 2026 · Besucherbereich",
+
+  xp:100
+
+}));
+
+
+const quests=[
+
+{
+  id:"start",
+  day:1,
+  icon:"🚗",
+  time:"09:00",
+  name:"MISSION START",
+  desc:"Abfahrt in Gelsenkirchen",
+  xp:100
+},
+
+{
+  id:"base",
+  day:1,
+  icon:"🏨",
+  time:"10:30",
+  name:"BASE CAMP",
+  desc:"Hyatt – Auto parken & Gepäck abgeben",
+  xp:100
+},
+
+{
+  id:"spawn",
+  day:1,
+  icon:"📸",
+  time:"11:00",
+  name:"SPAWN POINT SHOT",
+  desc:"Erstes Papa-&-Theo-gamescom-Foto",
+  xp:150,
+  photo:true
+},
+
+{
+  id:"gameon",
+  day:1,
+  icon:"🎮",
+  time:"11:00",
+  name:"GAME ON!",
+  desc:"gamescom betreten",
+  xp:100
+},
+
+{
+  id:"scout",
+  day:1,
+  icon:"🕵️",
+  time:"Vormittag",
+  name:"SCOUT RUN",
+  desc:"Hallen erkunden und interessante Stände entdecken",
+  xp:150
+},
+
+{
+  id:"play3",
+  day:1,
+  icon:"🕹️",
+  time:"bis Mittag",
+  name:"PLAYTEST",
+  desc:"Mindestens drei Spiele ausprobieren",
+  xp:200
+},
+
+{
+  id:"food",
+  day:1,
+  icon:"🍕",
+  time:"13:30",
+  name:"ENERGY BOOST",
+  desc:"Essen und Pause",
+  xp:100
+},
+
+{
+  id:"booth",
+  day:1,
+  icon:"✨",
+  time:"Nachmittag",
+  name:"LEGENDARY BOOTH",
+  desc:"Foto vom bisher coolsten Stand",
+  xp:150,
+  photo:true
+},
+
+{
+  id:"race",
+  day:1,
+  icon:"🏎️",
+  time:"Nachmittag",
+  name:"SPEED RUN",
+  desc:"Ein Rennspiel ausprobieren",
+  xp:150
+},
+
+{
+  id:"secret",
+  day:1,
+  icon:"❓",
+  time:"Nachmittag",
+  name:"SECRET DISCOVERY",
+  desc:"Ein unerwartet cooles Game entdecken",
+  xp:200
+},
+
+{
+  id:"save",
+  day:1,
+  icon:"💾",
+  time:"ca. 18:00",
+  name:"SAVE POINT",
+  desc:"Zurück zum Hyatt",
+  xp:100
+},
+
+{
+  id:"dinner",
+  day:1,
+  icon:"🌮",
+  time:"19:30",
+  name:"BOSS FOOD",
+  desc:"Abendessen im Café Especial",
+  xp:150
+},
+
+
+{
+  id:"sleep",
+  day:2,
+  icon:"😴",
+  time:"bis 09:00",
+  name:"SLEEP MODE",
+  desc:"Ausschlafen",
+  xp:100
+},
+
+{
+  id:"breakfast",
+  day:2,
+  icon:"🥐",
+  time:"09:15",
+  name:"ENERGY +100",
+  desc:"Frühstück im Hyatt",
+  xp:100
+},
+
+{
+  id:"walk",
+  day:2,
+  icon:"🚶",
+  time:"10:15",
+  name:"FINAL LEVEL START",
+  desc:"Zu Fuß zur gamescom",
+  xp:100
+},
+
+{
+  id:"game2",
+  day:2,
+  icon:"🎮",
+  time:"10:30",
+  name:"GAME ON!",
+  desc:"Zurück auf der gamescom",
+  xp:100
+},
+
+{
+  id:"victory",
+  day:2,
+  icon:"🏆",
+  time:"nach Boss 3",
+  name:"VICTORY SHOT",
+  desc:"Papa-&-Theo-Foto nach dem Boss Run",
+  xp:250,
+  photo:true
+},
+
+{
+  id:"lunch",
+  day:2,
+  icon:"🍔",
+  time:"ca. 13:00",
+  name:"HEALING POINT",
+  desc:"Mittagspause",
+  xp:100
+},
+
+{
+  id:"best",
+  day:2,
+  icon:"❤️",
+  time:"Nachmittag",
+  name:"BEST MOMENT",
+  desc:"Foto von Theos Lieblingsmoment",
+  xp:200,
+  photo:true
+},
+
+{
+  id:"free",
+  day:2,
+  icon:"🕹️",
+  time:"danach",
+  name:"FREE PLAY",
+  desc:"Lieblingsspiele und spontane Entdeckungen",
+  xp:150
+},
+
+{
+  id:"selfie",
+  day:2,
+  icon:"😎",
+  time:"zum Schluss",
+  name:"FINAL SELFIE",
+  desc:"Letztes Papa-&-Theo-gamescom-Selfie",
+  xp:150,
+  photo:true
+}
+
+];
+
+
+function fresh(){
+
+return{
+
+  done:{},
+
+  detectorDone:{},
+
+  targets:[],
+
+  customStands:[],
+
+  currentHall:"",
+
+  top3:[],
+
+  topLocked:false,
+
+  boss:[false,false,false],
+
+  day:1,
+
+  lives:10
+
+};
+
+}
+
+
+let s;
+
+try{
+
+  s={
+    ...fresh(),
+    ...JSON.parse(localStorage.getItem(KEY)||"{}")
+  };
+
+  if(!s.detectorDone){
+    s.detectorDone={};
+  }
+
+}catch{
+
+  s=fresh();
+
+}
+
+
+function save(){
+
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(s)
+  );
+
+}
+
+
+function xp(){
+
+  let n=0;
+
+
+  quests.forEach(q=>{
+
+    if(s.done[q.id]){
+      n+=q.xp;
+    }
+
+  });
+
+
+  s.targets.forEach(t=>{
+
+    if(t.done){
+      n+=t.xp;
+    }
+
+  });
+
+
+  s.boss.forEach(x=>{
+
+    if(x){
+      n+=300;
+    }
+
+  });
+
+
+  DETECTOR.forEach(m=>{
+
+    if(s.detectorDone[m.id]){
+      n+=m.xp;
+    }
+
+  });
+
+
+  return Math.min(MAX,n);
+
+}
+
+
+function getRank(n=xp()){
+
+  if(n>=4750){
+    return "🏆 GAMECOM LEGEND";
+  }
+
+  if(n>=4000){
+    return "🥈 PRO GAMER";
+  }
+
+  if(n>=3000){
+    return "🥉 GAMECOM SCOUT";
+  }
+
+  return "🎮 MISSION IN PROGRESS";
+
+}
+
+
+
+let db;
+
+
+function openDB(){
+
+return new Promise((ok,no)=>{
+
+  let r=
+  indexedDB.open(
+    "PapaTheoV13Photos",
+    1
+  );
+
+
+  r.onupgradeneeded=e=>{
+
+    let d=e.target.result;
+
+    if(!d.objectStoreNames.contains("p")){
+      d.createObjectStore("p");
+    }
+
+  };
+
+
+  r.onsuccess=e=>{
+
+    db=e.target.result;
+
+    ok();
+
+  };
+
+
+  r.onerror=no;
+
+});
+
+}
+
+
+function putPhoto(id,file){
+
+return new Promise(ok=>{
+
+  let t=
+  db.transaction(
+    "p",
+    "readwrite"
+  );
+
+  t.objectStore("p")
+  .put(file,id);
+
+  t.oncomplete=ok;
+
+});
+
+}
+
+
+function getPhoto(id){
+
+return new Promise(ok=>{
+
+  let r=
+  db.transaction("p")
+  .objectStore("p")
+  .get(id);
+
+  r.onsuccess=()=>ok(r.result);
+
+});
+
+}
+
+
+
+function loseLife(){
+
+  if(s.lives<=0){
+
+    alert("❤️ Keine Leben mehr.");
+
+    return false;
+
+  }
+
+  s.lives--;
+
+  return true;
+
+}
+
+
+
+function toggleDone(id){
+
+  if(s.done[id]){
+
+    if(!loseLife()){
+      return;
+    }
+
+    s.done[id]=false;
+
+  }else{
+
+    s.done[id]=true;
+
+  }
+
+  save();
+
+  render();
+
+}
+
+
+
+function renderDetector(){
+
+  let root=
+  document.getElementById(
+    "detectorArea"
+  );
+
+  root.innerHTML="";
+
+
+  DETECTOR.forEach(m=>{
+
+    let done=
+    !!s.detectorDone[m.id];
+
+
+    let d=
+    document.createElement("div");
+
+
+    d.className=
+    "card "+(done?"done":"");
+
+
+    d.innerHTML=`
+
+      <div class="feed">
+
+        <div class="ico">
+          ${m.icon}
+        </div>
+
+        <div class="grow">
+
+          <div class="missionBadge">
+            MESSE-MISSION
+          </div>
+
+          <div class="name">
+            ${m.name}
+          </div>
+
+          <div class="desc">
+            ${m.desc}
+          </div>
+
+          <div class="xp">
+            +${m.xp} XP
+          </div>
+
+        </div>
+
+        ${
+          m.mode==="found"
+          ?
+          `<button class="tick">
+            ${done?"✓":""}
+          </button>`
+          :
+          ""
+        }
+
+      </div>
+
+      ${
+        m.mode==="photo"
+        ?
+        `
+
+        <button class="photoBtn">
+          📸 ${done?"FOTO NEU":"FOTO MACHEN"}
+        </button>
+
+        <input
+          type="file"
+          accept="image/*"
+          capture="environment"
+          hidden
+        >
+
+        <div class="preview"></div>
+
+        `
+        :
+        ""
+      }
+
+    `;
+
+
+    if(m.mode==="found"){
+
+      d.querySelector(".tick")
+      .onclick=()=>{
+
+        if(done){
+
+          if(!loseLife()){
+            return;
+          }
+
+          s.detectorDone[m.id]=false;
+
+        }else{
+
+          s.detectorDone[m.id]=true;
+
+        }
+
+        save();
+
+        render();
+
+      };
+
+    }else{
+
+      let input=
+      d.querySelector("input");
+
+
+      d.querySelector(".photoBtn")
+      .onclick=()=>input.click();
+
+
+      input.onchange=async()=>{
+
+        if(!input.files[0]){
+          return;
+        }
+
+
+        await putPhoto(
+          "detector_"+m.id,
+          input.files[0]
+        );
+
+
+        s.detectorDone[m.id]=true;
+
+        save();
+
+        render();
+
+      };
+
+
+      getPhoto(
+        "detector_"+m.id
+      ).then(f=>{
+
+        if(f){
+
+          d.querySelector(".preview")
+          .innerHTML=
+          `<img
+            class="photoImg"
+            src="${URL.createObjectURL(f)}"
+          >`;
+
+        }
+
+      });
+
+    }
+
+
+    root.appendChild(d);
+
+  });
+
+}
+
+
+
+function questCard(q){
+
+  let d=
+  document.createElement("div");
+
+
+  d.className=
+  "card "+(s.done[q.id]?"done":"");
+
+
+  d.innerHTML=`
+
+  <div class="feed">
+
+    <div class="ico">
+      ${q.icon}
+    </div>
+
+    <div class="grow">
+
+      <div class="time">
+        ${q.time}
+      </div>
+
+      <div class="name">
+        ${q.name}
+      </div>
+
+      <div class="desc">
+        ${q.desc}
+      </div>
+
+      <div class="xp">
+        +${q.xp} XP
+      </div>
+
+    </div>
+
+    ${
+      q.photo
+      ?
+      ""
+      :
+      `<button class="tick">
+        ${s.done[q.id]?"✓":""}
+      </button>`
+    }
+
+  </div>
+
+
+  ${
+    q.photo
+    ?
+    `
+
+    <button class="photoBtn">
+      📸 ${s.done[q.id]?"FOTO NEU":"FOTO MACHEN"}
+    </button>
+
+    <input
+      type="file"
+      accept="image/*"
+      capture="environment"
+      hidden
+    >
+
+    <div class="preview"></div>
+
+    `
+    :
+    ""
+  }
+
+  `;
+
+
+  if(q.photo){
+
+    let input=
+    d.querySelector("input");
+
+
+    d.querySelector(".photoBtn")
+    .onclick=()=>input.click();
+
+
+    input.onchange=async()=>{
+
+      if(!input.files[0]){
+        return;
+      }
+
+
+      await putPhoto(
+        q.id,
+        input.files[0]
+      );
+
+
+      s.done[q.id]=true;
+
+      save();
+
+      render();
+
+    };
+
+
+    getPhoto(q.id)
+    .then(f=>{
+
+      if(f){
+
+        d.querySelector(".preview")
+        .innerHTML=
+        `<img
+          class="photoImg"
+          src="${URL.createObjectURL(f)}"
+        >`;
+
+      }
+
+    });
+
+
+  }else{
+
+    d.querySelector(".tick")
+    .onclick=
+    ()=>toggleDone(q.id);
+
+  }
+
+
+  return d;
+
+}
+
+
+
+function allStands(){
+
+  return[
+    ...MASTER_STANDS,
+    ...s.customStands
+  ];
+
+}
+
+
+
+function selected(id){
+
+  return s.targets.some(
+    t=>t.id===id
+  );
+
+}
+
+
+
+function toggleGoal(t){
+
+  let i=
+  s.targets.findIndex(
+    x=>x.id===t.id
+  );
+
+
+  if(i>=0){
+
+    if(s.top3.includes(t.id)){
+
+      alert(
+        "Erst den TOP-3-Marker entfernen."
+      );
+
+      return;
+
+    }
+
+
+    s.targets.splice(i,1);
+
+
+  }else{
+
+
+    s.targets.push({
+
+      ...t,
+
+      done:false
+
+    });
+
+  }
+
+
+  save();
+
+  render();
+
+}
+
+
+
+function standRow(t){
+
+  let d=
+  document.createElement("div");
+
+
+  d.className="standRow";
+
+
+  d.innerHTML=`
+
+  <div class="standTop">
+
+    <div class="ico">
+      ${t.icon||"🎮"}
+    </div>
+
+    <div class="grow">
+
+      <div class="name">
+        ${t.name}
+      </div>
+
+      <div class="standMeta">
+        📍 Halle ${t.hall}
+        · Stand ${t.stand}
+      </div>
+
+      <div class="desc">
+        ${t.detail||""}
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="chips">
+
+    <button
+      class="goalBtn
+      ${selected(t.id)?"selected":""}"
+    >
+
+      ${
+        selected(t.id)
+        ?
+        "❤️ THEOS ZIEL ✓"
+        :
+        "🤍 ALS ZIEL"
+      }
+
+    </button>
+
+  </div>
+
+  `;
+
+
+  d.querySelector(".goalBtn")
+  .onclick=
+  ()=>toggleGoal(t);
+
+
+  return d;
+
+}
+
+
+
+function targetCard(t){
+
+  let d=
+  document.createElement("div");
+
+
+  let ti=
+  s.top3.indexOf(t.id);
+
+
+  d.className=
+  "card target "+
+  (t.done?"doneTarget":"");
+
+
+  d.innerHTML=`
+
+  <div class="feed">
+
+    <div class="ico">
+      ${t.icon}
+    </div>
+
+    <div class="grow">
+
+      <div class="name">
+        ${t.name}
+      </div>
+
+      <div class="desc">
+        📍 Halle ${t.hall}
+        · Stand ${t.stand}
+      </div>
+
+      <div class="xp">
+        Besuch +${t.xp} XP
+      </div>
+
+    </div>
+
+
+    <button class="tick">
+      ${t.done?"✓":""}
+    </button>
+
+  </div>
+
+
+  <div class="chips">
+
+    <span class="goalBadge">
+      ❤️ Theos Ziel
+    </span>
+
+
+    <button
+      class="top3Btn
+      ${ti>=0?"on":""}"
+      ${s.topLocked?"disabled":""}
+    >
+
+      ${
+        ti>=0
+        ?
+        "🏆 TOP "+(ti+1)
+        :
+        "🏆 TOP 3"
+      }
+
+    </button>
+
+  </div>
+
+  `;
+
+
+  d.querySelector(".tick")
+  .onclick=()=>{
+
+    if(t.done){
+
+      if(!loseLife()){
+        return;
+      }
+
+      t.done=false;
+
+    }else{
+
+      t.done=true;
+
+    }
+
+    save();
+
+    render();
+
+  };
+
+
+  d.querySelector(".top3Btn")
+  .onclick=()=>{
+
+    if(s.topLocked){
+      return;
+    }
+
+
+    let i=
+    s.top3.indexOf(t.id);
+
+
+    if(i>=0){
+
+      s.top3.splice(i,1);
+
+    }else{
+
+      if(s.top3.length>=3){
+
+        alert(
+          "Maximal 3 Boss-Ziele."
+        );
+
+        return;
+
+      }
+
+
+      s.top3.push(t.id);
+
+    }
+
+
+    save();
+
+    render();
+
+  };
+
+
+  return d;
+
+}
+
+
+
+function halls(){
+
+  let h=[
+    ...new Set(
+      allStands()
+      .map(x=>x.hall)
+    )
+  ];
+
+
+  return h.sort(
+    (a,b)=>
+    a.localeCompare(
+      b,
+      undefined,
+      {numeric:true}
+    )
+  );
+
+}
+
+
+
+function renderMap(){
+
+  let hb=
+  document.getElementById(
+    "hallButtons"
+  );
+
+
+  hb.innerHTML="";
+
+
+  halls().forEach(h=>{
+
+    let b=
+    document.createElement("button");
+
+
+    b.className=
+    "hall "+
+    (s.currentHall===h?"on":"");
+
+
+    b.textContent=
+    "Halle "+h;
+
+
+    b.onclick=()=>{
+
+      s.currentHall=
+      s.currentHall===h
+      ?
+      ""
+      :
+      h;
+
+
+      save();
+
+      render();
+
+    };
+
+
+    hb.appendChild(b);
+
+  });
+
+
+  let root=
+  document.getElementById(
+    "hallTargets"
+  );
+
+
+  root.innerHTML="";
+
+
+  let search=
+  (
+    document
+    .getElementById(
+      "exhibitorSearch"
+    )
+    ?.value
+    ||
+    ""
+  )
+  .trim()
+  .toLowerCase();
+
+
+  let matches=
+  allStands()
+  .filter(t=>{
+
+    let hallOK=
+    !s.currentHall
+    ||
+    t.hall===s.currentHall;
+
+
+    let searchOK=
+    !search
+    ||
+    (
+      t.name+
+      " "+
+      t.stand+
+      " "+
+      (t.detail||"")
+    )
+    .toLowerCase()
+    .includes(search);
+
+
+    return hallOK&&searchOK;
+
+  });
+
+
+  matches.sort(
+    (a,b)=>
+    a.name.localeCompare(
+      b.name,
+      "de"
+    )
+  );
+
+
+  if(!matches.length){
+
+    root.innerHTML=
+    '<div class="card muted">Keine passenden Aussteller gefunden.</div>';
+
+    return;
+
+  }
+
+
+  matches.forEach(
+    t=>
+    root.appendChild(
+      standRow(t)
+    )
+  );
+
+}
+
+
+
+function renderTargets(){
+
+  let root=
+  document.getElementById(
+    "targetsList"
+  );
+
+
+  root.innerHTML="";
+
+
+  document
+  .getElementById(
+    "top3Counter"
+  )
+  .innerHTML=
+
+  `🏆 <b>${s.top3.length}/3 Boss-Ziele</b>
+  ${s.topLocked?" · 🔒 bestätigt":""}`;
+
+
+  if(!s.targets.length){
+
+    root.innerHTML=
+    '<div class="card muted">Noch keine Ziele. Auf der Map interessante Aussteller mit ❤️ auswählen.</div>';
+
+    return;
+
+  }
+
+
+  s.targets.forEach(
+    t=>
+    root.appendChild(
+      targetCard(t)
+    )
+  );
+
+}
+
+
+
+function renderFeed(){
+
+  let root=
+  document.getElementById(
+    "feed"
+  );
+
+
+  root.innerHTML="";
+
+
+  quests
+  .filter(
+    q=>q.day===s.day
+  )
+  .forEach(
+    q=>
+    root.appendChild(
+      questCard(q)
+    )
+  );
+
+}
+
+
+
+function renderTop(){
+
+  let root=
+  document.getElementById(
+    "top3Area"
+  );
+
+
+  if(s.day!==1){
+
+    root.innerHTML="";
+
+    return;
+
+  }
+
+
+  if(s.topLocked){
+
+    root.innerHTML=`
+
+    <div class="card">
+
+      <h3>
+        🔒 SONNTAGS-BOSSE
+      </h3>
+
+      ${
+        s.top3
+        .map((id,i)=>{
+
+          let t=
+          s.targets.find(
+            x=>x.id===id
+          );
+
+          return`
+          <p>
+            👾 Boss ${i+1}:
+            <b>${t?.name||""}</b>
+          </p>
+          `;
+
+        })
+        .join("")
+      }
+
+    </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  root.innerHTML=`
+
+  <div class="card">
+
+    <h3>
+      🌙 SCOUT REPORT
+    </h3>
+
+    <div class="muted">
+      Erst Samstagabend wählt Theo seine drei Lieblingsziele für Sonntag.
+    </div>
+
+    <div class="mapHint">
+      🏆 ${s.top3.length}/3 ausgewählt
+    </div>
+
+    <button
+      id="lockTop"
+      class="mainBtn"
+      ${s.top3.length===3?"":"disabled"}
+    >
+      🔐 TOP 3 FESTLEGEN
+    </button>
+
+  </div>
+
+  `;
+
+
+  document
+  .getElementById(
+    "lockTop"
+  )
+  .onclick=()=>{
+
+    askPin(
+
+      "Papa bestätigt Theos Top 3.",
+
+      ()=>{
+
+        s.topLocked=true;
+
+        s.day=2;
+
+        save();
+
+        render();
+
+      }
+
+    );
+
+  };
+
+}
+
+
+
+function renderBoss(){
+
+  let root=
+  document.getElementById(
+    "bossArea"
+  );
+
+
+  if(!s.topLocked){
+
+    root.innerHTML="";
+
+    return;
+
+  }
+
+
+  root.innerHTML=
+  '<div class="section"><b>👾 BOSS RUN – THEOS TOP 3</b></div>';
+
+
+  s.top3.forEach((id,i)=>{
+
+    let t=
+    s.targets.find(
+      x=>x.id===id
+    );
+
+
+    let d=
+    document.createElement("div");
+
+
+    d.className=
+    "card boss "+
+    (s.boss[i]?"done":"");
+
+
+    d.innerHTML=`
+
+    <div class="feed">
+
+      <div class="ico">
+        ${t?.icon||"👾"}
+      </div>
+
+      <div class="grow">
+
+        <span class="bossTag">
+          BOSS ${i+1}
+        </span>
+
+        <div class="name">
+          ${t?.name||"Ziel"}
+        </div>
+
+        <div class="desc">
+          Halle ${t?.hall}
+          · Stand ${t?.stand}
+        </div>
+
+        <div class="xp">
+          +300 XP
+        </div>
+
+      </div>
+
+
+      <button class="tick">
+        ${s.boss[i]?"✓":""}
+      </button>
+
+    </div>
+
+    `;
+
+
+    d.querySelector(".tick")
+    .onclick=()=>{
+
+      if(s.boss[i]){
+        return;
+      }
+
+
+      askPin(
+
+        `Papa bestätigt Boss ${i+1}.`,
+
+        ()=>{
+
+          s.boss[i]=true;
+
+          if(t){
+            t.done=true;
+          }
+
+          save();
+
+          render();
+
+        }
+
+      );
+
+    };
+
+
+    root.appendChild(d);
+
+  });
+
+}
+
+
+
+function renderScore(){
+
+  let n=xp();
+
+
+  let root=
+  document.getElementById(
+    "rewards"
+  );
+
+
+  root.innerHTML="";
+
+
+  rewards.forEach(r=>{
+
+    root.innerHTML+=`
+
+    <div
+      class="reward
+      ${n>=r.xp?"unlocked":"locked"}"
+    >
+
+      <div style="font-size:27px">
+        ${r.icon}
+      </div>
+
+      <div style="flex:1">
+
+        <b>
+          ${r.rank}
+        </b>
+
+        <div class="muted">
+          ${r.text}
+        </div>
+
+        <div class="xp">
+          ${r.xp.toLocaleString("de-DE")} XP
+        </div>
+
+      </div>
+
+      ${
+        n>=r.xp
+        ?
+        "✅"
+        :
+        "🔒"
+      }
+
+    </div>
+
+    `;
+
+  });
+
+
+  document
+  .getElementById(
+    "stats"
+  )
+  .innerHTML=`
+
+  ⭐ <b>
+  ${n.toLocaleString("de-DE")}
+  / 5.000 XP
+  </b>
+
+  <br><br>
+
+  ❤️ Leben:
+  <b>${s.lives}/10</b>
+
+  <br>
+
+  ❤️ Ziele:
+  <b>${s.targets.length}</b>
+
+  <br>
+
+  🎯 Besucht:
+  <b>
+  ${
+    s.targets
+    .filter(t=>t.done)
+    .length
+  }
+  </b>
+
+  <br>
+
+  🕵️ Messe-Missionen:
+  <b>
+  ${
+    DETECTOR
+    .filter(
+      m=>s.detectorDone[m.id]
+    )
+    .length
+  }
+  /
+  ${DETECTOR.length}
+  </b>
+
+  <br>
+
+  👾 Bosse:
+  <b>
+  ${
+    s.boss
+    .filter(Boolean)
+    .length
+  }
+  /3
+  </b>
+
+  `;
+
+
+  let finish=
+  document.getElementById(
+    "finish"
+  );
+
+
+  let ready=
+  s.boss.every(Boolean)
+  &&
+  s.done.victory;
+
+
+  finish.disabled=!ready;
+
+
+  finish.textContent=
+  ready
+  ?
+  "🔐 MISSION MIT PAPA ABSCHLIESSEN"
+  :
+  "🔒 BOSSE + VICTORY SHOT FEHLEN";
+
+
+  finish.onclick=()=>{
+
+    if(ready){
+
+      askPin(
+
+        "Papa gibt Mission Complete frei.",
+
+        finishMission
+
+      );
+
+    }
+
+  };
+
+}
+
+
+
+let pinAction=null;
+
+
+function askPin(text,action){
+
+  pinAction=action;
+
+
+  document
+  .getElementById(
+    "pinMsg"
+  )
+  .textContent=text;
+
+
+  document
+  .getElementById(
+    "pin"
+  )
+  .value="";
+
+
+  document
+  .getElementById(
+    "pinErr"
+  )
+  .textContent="";
+
+
+  document
+  .getElementById(
+    "pinModal"
+  )
+  .classList.add(
+    "show"
+  );
+
+}
+
+
+
+document
+.getElementById(
+  "pinCancel"
+)
+.onclick=()=>{
+
+  document
+  .getElementById(
+    "pinModal"
+  )
+  .classList.remove(
+    "show"
+  );
+
+};
+
+
+
+document
+.getElementById(
+  "pinOK"
+)
+.onclick=()=>{
+
+  let pin=
+  document
+  .getElementById(
+    "pin"
+  );
+
+
+  if(pin.value===PIN){
+
+    document
+    .getElementById(
+      "pinModal"
+    )
+    .classList.remove(
+      "show"
+    );
+
+
+    let a=pinAction;
+
+    pinAction=null;
+
+
+    if(a){
+      a();
+    }
+
+
+  }else{
+
+
+    document
+    .getElementById(
+      "pinErr"
+    )
+    .textContent=
+    "❌ Falscher Papa-PIN";
+
+  }
+
+};
+
+
+
+function finishMission(){
+
+  let n=xp();
+
+
+  document
+  .getElementById(
+    "finalScore"
+  )
+  .textContent=
+
+  n.toLocaleString("de-DE")
+  +
+  " / 5.000 XP";
+
+
+  document
+  .getElementById(
+    "finalRank"
+  )
+  .textContent=
+  getRank(n);
+
+
+  document
+  .getElementById(
+    "finalRewards"
+  )
+  .innerHTML=
+
+  rewards
+  .map(r=>
+
+    `<div
+      class="reward
+      ${n>=r.xp?"unlocked":"locked"}"
+    >
+
+      ${
+        n>=r.xp
+        ?
+        "✅"
+        :
+        "🔒"
+      }
+
+      ${r.icon}
+      ${r.text}
+
+    </div>`
+
+  )
+  .join("");
+
+
+  document
+  .getElementById(
+    "final"
+  )
+  .classList.add(
+    "show"
+  );
+
+}
+
+
+
+function render(){
+
+  let n=xp();
+
+
+  document
+  .getElementById(
+    "xpText"
+  )
+  .textContent=
+
+  n.toLocaleString("de-DE")
+  +
+  " / 5.000 XP";
+
+
+  document
+  .getElementById(
+    "xpBar"
+  )
+  .style.width=
+
+  Math.min(
+    100,
+    n/MAX*100
+  )
+  +"%";
+
+
+  document
+  .getElementById(
+    "rank"
+  )
+  .textContent=
+  getRank(n);
+
+
+  document
+  .getElementById(
+    "lifeIcons"
+  )
+  .textContent=
+
+  "❤️".repeat(s.lives)
+  +
+  "🖤".repeat(
+    10-s.lives
+  );
+
+
+  document
+  .getElementById(
+    "lifeText"
+  )
+  .textContent=
+  s.lives+"/10";
+
+
+  document
+  .getElementById(
+    "routeStats"
+  )
+  .textContent=
+
+  `❤️ ${s.targets.length} Ziele
+  · 🏆 ${s.top3.length}/3 Top-Ziele
+  · 🎯 ${
+    s.targets
+    .filter(t=>t.done)
+    .length
+  } geschafft`;
+
+
+  document
+  .getElementById(
+    "currentHallText"
+  )
+  .textContent=
+
+  s.currentHall
+  ?
+  "📍 Aktuelle Halle: "
+  +s.currentHall
+  :
+  "📍 Auf der Map eine Halle auswählen";
+
+
+  renderDetector();
+
+  renderFeed();
+
+  renderTargets();
+
+  renderMap();
+
+  renderTop();
+
+  renderBoss();
+
+  renderScore();
+
+}
+
+
+
+document
+.querySelectorAll(
+  ".tab"
+)
+.forEach(b=>{
+
+  b.onclick=()=>{
+
+    document
+    .querySelectorAll(
+      ".tab"
+    )
+    .forEach(
+      x=>x.classList.remove(
+        "active"
+      )
+    );
+
+
+    document
+    .querySelectorAll(
+      ".page"
+    )
+    .forEach(
+      x=>x.classList.remove(
+        "active"
+      )
+    );
+
+
+    b.classList.add(
+      "active"
+    );
+
+
+    document
+    .getElementById(
+      b.dataset.p
+    )
+    .classList.add(
+      "active"
+    );
+
+  };
+
+});
+
+
+
+document
+.getElementById(
+  "addTarget"
+)
+.onclick=()=>{
+
+  let n=
+  document
+  .getElementById(
+    "customName"
+  )
+  .value
+  .trim();
+
+
+  let h=
+  document
+  .getElementById(
+    "customHall"
+  )
+  .value
+  .trim();
+
+
+  let st=
+  document
+  .getElementById(
+    "customStand"
+  )
+  .value
+  .trim();
+
+
+  if(!n||!h){
+
+    alert(
+      "Bitte Name und Halle eingeben."
+    );
+
+    return;
+
+  }
+
+
+  let t={
+
+    id:
+    "custom_"+
+    Date.now(),
+
+    icon:"🎯",
+
+    name:n,
+
+    hall:h,
+
+    stand:
+    st||"noch offen",
+
+    detail:
+    "Eigenes Theo-Ziel",
+
+    xp:150,
+
+    done:false
+
+  };
+
+
+  s.customStands.push({
+    ...t
+  });
+
+
+  s.targets.push({
+    ...t
+  });
+
+
+  document
+  .getElementById(
+    "customName"
+  )
+  .value="";
+
+
+  document
+  .getElementById(
+    "customHall"
+  )
+  .value="";
+
+
+  document
+  .getElementById(
+    "customStand"
+  )
+  .value="";
+
+
+  save();
+
+  render();
+
+};
+
+
+
+openDB()
+.then(render)
+.catch(render);
+
+</script>
+
+</body>
+</html>
